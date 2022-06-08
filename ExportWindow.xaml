@@ -1,0 +1,106 @@
+﻿<Window x:Class="QuanLyKhoHangCBNV.ExportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyKhoHangCBNV"
+        
+        xmlns:uc="clr-namespace:QuanLyKhoHangCBNV.UserControlCBNV"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        x:Name="window"
+        
+        Title="Export Window" Height="500" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Control Bar-->
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=window}"></uc:ControlBarUC>
+        </Grid>
+
+        <!--Main Export-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--Element Binding from Selected Item-->
+            <materialDesign:Card Grid.Row="0" Margin="5">
+                <WrapPanel Margin="0 0 0 10">
+                    <TextBox Text="{Binding SupplyDisplayName, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5"
+                      materialDesign:HintAssist.Hint="Supply's Name"
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                      VerticalAlignment="Center"/>
+
+                    <DatePicker Margin="5 5 15 5" SelectedDate="{Binding DateExport, UpdateSourceTrigger=PropertyChanged}"
+                                VerticalAlignment="Center" Width="100" materialDesign:HintAssist.Hint="Export Date"
+                      Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+
+                    <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5"
+                      materialDesign:HintAssist.Hint="Quantity"
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                      VerticalAlignment="Center"/>
+
+                    <TextBox Text="{Binding PriceExport, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5"
+                      materialDesign:HintAssist.Hint="Export Price"
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                      VerticalAlignment="Center"/>
+
+                    <ComboBox ItemsSource="{Binding Customer.DisplayName}" 
+                              SelectedItem="{Binding SelectedCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:HintAssist.Hint="Role"
+                              IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
+
+                    <TextBox Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5"
+                      materialDesign:HintAssist.Hint="Export Status"
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                      VerticalAlignment="Center"/>
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <!--Button Function (CRUD)-->
+            <materialDesign:Card Grid.Row="1" Margin="5">
+                <WrapPanel HorizontalAlignment="Center">
+                    <Button Command="{Binding AddCommand}" Content="Add" Margin="5" Width="120"/>
+                    <Button Command="{Binding EditCommand}" Content="Edit" Margin="5" Width="120"/>
+                    <Button Command="{Binding DeleteCommand}" Content="Delete" Margin="5" Width="120"/>
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <!--Item-->
+            <materialDesign:Card Grid.Row="2" Margin="5" VerticalAlignment="Stretch">
+                <ScrollViewer VerticalScrollBarVisibility="auto">
+                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Supply's Name" DisplayMemberBinding="{Binding Supply.DisplayName}"/>
+                                <GridViewColumn Header="Export Date" DisplayMemberBinding="{Binding Export.DateExport}"/>
+                                <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>
+                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Import.ExportPrice}"/>
+                                <GridViewColumn Header="Customer" DisplayMemberBinding="{Binding Customer.DisplayName}"/>
+                                <GridViewColumn Header="Export Status" DisplayMemberBinding="{Binding Status}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Window>

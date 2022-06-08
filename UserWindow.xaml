@@ -1,0 +1,91 @@
+﻿<Window x:Class="QuanLyKhoHangCBNV.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyKhoHangCBNV"
+        
+        xmlns:uc="clr-namespace:QuanLyKhoHangCBNV.UserControlCBNV"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        x:Name="window"
+        
+        Title="Account" Height="500" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Control Bar-->
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=window}"></uc:ControlBarUC>
+        </Grid>
+
+        <!--Main Supply-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--Element Binding from Selected Item-->
+            <materialDesign:Card Grid.Row="0" Margin="5">
+                <WrapPanel Margin="0 0 0 10">
+                    <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5"
+                      materialDesign:HintAssist.Hint="Username"
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                      VerticalAlignment="Center"/>
+
+                    <ComboBox ItemsSource="{Binding Role}" 
+                              SelectedItem="{Binding SelectedRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:HintAssist.Hint="Role"
+                              IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
+
+                    <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5"
+                      materialDesign:HintAssist.Hint="Display Name"
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                      VerticalAlignment="Center"/>
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <!--Button Function (CRUD)-->
+            <materialDesign:Card Grid.Row="1" Margin="5">
+                <WrapPanel HorizontalAlignment="Center">
+                    <Button Command="{Binding AddCommand}" Content="Add" Margin="5" Width="120"/>
+                    <Button Command="{Binding EditCommand}" Content="Edit" Margin="5" Width="120"/>
+                    <Button Command="{Binding DeleteCommand}" Content="Delete" Margin="5" Width="120"/>
+                    <Button Command="{Binding ChangePasswordCommand}" Content="Change password" Margin="5" Width="150"/>
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <!--Item-->
+            <materialDesign:Card Grid.Row="2" Margin="5" VerticalAlignment="Stretch">
+                <ScrollViewer VerticalScrollBarVisibility="auto">
+                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="Username" DisplayMemberBinding="{Binding UserName}"/>
+                                <GridViewColumn Header="Role" DisplayMemberBinding="{Binding Role.DisplayName}"/>
+                                <GridViewColumn Header="Display Name" DisplayMemberBinding="{Binding DisplayName}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Window>
