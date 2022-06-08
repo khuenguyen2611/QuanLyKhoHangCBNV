@@ -8,10 +8,14 @@ namespace QuanLyKhoHangCBNV.Model
 {
     public class DataProvider
     {
-        void Demo()
+        private static DataProvider _ins;
+        public static DataProvider Ins { get { if (_ins == null) _ins = new DataProvider(); return _ins; } set { _ins = value; } }
+
+        public QuanLyKhoHangEntities DB { get; set; }
+
+        private DataProvider()
         {
-            QuanLyKhoHangEntities db = new QuanLyKhoHangEntities();
-            db.Supplies.ToList();
+            DB = new QuanLyKhoHangEntities();
         }
     }
 }
