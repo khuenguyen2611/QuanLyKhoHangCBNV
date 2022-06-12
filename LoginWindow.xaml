@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyKhoHangCBNV"
         xmlns:uc="clr-namespace:QuanLyKhoHangCBNV.UserControlCBNV"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
          TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -17,6 +18,7 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
+        DataContext="{StaticResource LoginVM}"
         
         Name="loginWindow"
         Title="Login to Application" Height="300" Width="400">
@@ -45,8 +47,10 @@
                 <Grid Grid.Row="0">
                     <TextBox
                       materialDesign:HintAssist.Hint="Username"
+                        Text="{Binding Username}"
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                      VerticalAlignment="Center" />
+                      VerticalAlignment="Center"
+                        />
                 </Grid>
 
                 <Grid Grid.Row="1">
@@ -57,7 +61,15 @@
                       materialDesign:TextFieldAssist.UnderlineBrush="Green"
                       Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                         VerticalAlignment="Center"
-                        />
+                        >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PasswordChanged">
+                                <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}"
+                                   CommandParameter="{Binding ElementName=FloatingPasswordBox}"
+                                   />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </PasswordBox>
                 </Grid>
 
                 <Grid Grid.Row="2">
@@ -69,6 +81,9 @@
                     <Button Grid.Column="0"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Width="100"
+                            IsDefault="True"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ElementName=loginWindow}"
                         ToolTip="Resource name: MaterialDesignRaisedButton"
                             Content="Login">
                     </Button>
@@ -76,6 +91,8 @@
                     <Button Grid.Column="1"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Width="100"
+                            Command="{Binding CloseCommand}"
+                            CommandParameter="{Binding ElementName=loginWindow}"
                         ToolTip="Resource name: MaterialDesignRaisedButton"
                             Content="Close">
                     </Button>

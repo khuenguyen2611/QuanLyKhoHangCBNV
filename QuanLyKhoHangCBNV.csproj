@@ -156,6 +156,7 @@
     </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ControlBarVM.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="CustomerWindow.xaml">
       <SubType>Designer</SubType>
@@ -256,6 +257,7 @@
       <DependentUpon>KhoHangModel.edmx</DependentUpon>
       <LastGenOutput>KhoHangModel.cs</LastGenOutput>
     </Content>
+    <Content Include="ScriptSQL\DBQuery.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

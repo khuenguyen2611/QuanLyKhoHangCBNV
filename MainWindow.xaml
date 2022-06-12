@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:QuanLyKhoHangCBNV"
         
         xmlns:uc="clr-namespace:QuanLyKhoHangCBNV.UserControlCBNV"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -27,7 +28,9 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
+                                   CommandParameter="{Binding ElementName=mainWindow}"
+                                   />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
