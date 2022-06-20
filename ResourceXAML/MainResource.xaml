@@ -4,4 +4,7 @@
                     >
     <viewmodel:MainViewModel x:Key="MainVM"/>
     <viewmodel:LoginViewModel x:Key="LoginVM"/>
+    <viewmodel:MeasureViewModel x:Key="MeasureVM"/>
+    <viewmodel:SupplierViewModel x:Key="SupplierVM"/>
+    <viewmodel:SupplyViewModel x:Key="SupplyVM"/>
 </ResourceDictionary>

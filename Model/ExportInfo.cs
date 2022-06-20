@@ -23,7 +23,6 @@ namespace QuanLyKhoHangCBNV.Model
     
         public virtual Customer Customer { get; set; }
         public virtual Export Export { get; set; }
-        public virtual ImportInfo ImportInfo { get; set; }
         public virtual Supply Supply { get; set; }
     }
 }

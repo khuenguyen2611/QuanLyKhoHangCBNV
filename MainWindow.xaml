@@ -23,7 +23,7 @@
         
         Name="mainWindow"
         DataContext="{StaticResource MainVM}"
-        Title="Main Application" Height="500" Width="600"
+        Title="Main Application" Height="700" Width="700"
         >
 
     <i:Interaction.Triggers>
@@ -433,12 +433,12 @@
                         </Grid>
 
                         <Grid Grid.Row="2">
-                            <ListView>
+                            <ListView ItemsSource="{Binding WarehouseList}">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn Header="No."/>
-                                        <GridViewColumn Header="Name of Supplies"/>
-                                        <GridViewColumn Header="Quantity Stored"/>
+                                        <GridViewColumn Header="No." DisplayMemberBinding="{Binding No}"/>
+                                        <GridViewColumn Header="Name of Supplies" DisplayMemberBinding="{Binding Supply.DisplayName}"/>
+                                        <GridViewColumn Header="Quantity Stored" DisplayMemberBinding="{Binding Count}"/>
                                     </GridView>
                                 </ListView.View>
                             </ListView>

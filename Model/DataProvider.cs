@@ -11,11 +11,11 @@ namespace QuanLyKhoHangCBNV.Model
         private static DataProvider _ins;
         public static DataProvider Ins { get { if (_ins == null) _ins = new DataProvider(); return _ins; } set { _ins = value; } }
 
-        public QuanLyKhoHangEntities DB { get; set; }
+        public QuanLyKhoHang DB { get; set; }
 
         private DataProvider()
         {
-            DB = new QuanLyKhoHangEntities();
+            DB = new QuanLyKhoHang();
         }
     }
 }

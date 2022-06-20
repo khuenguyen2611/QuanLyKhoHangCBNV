@@ -20,6 +20,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         x:Name="window"
+        DataContext="{StaticResource SupplyVM}"
         
         Title="SupplyWindow" Height="500" Width="600">
     <Grid>
@@ -49,12 +50,12 @@
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                       VerticalAlignment="Center"/>
 
-                    <ComboBox ItemsSource="{Binding Unit}" 
-                              SelectedItem="{Binding SelectedUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    <ComboBox ItemsSource="{Binding Measures}" DisplayMemberPath="DisplayName"
+                              SelectedItem="{Binding SelectedMeasure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         materialDesign:HintAssist.Hint="Measure"
                               IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
 
-                    <ComboBox ItemsSource="{Binding Supplier}" 
+                    <ComboBox ItemsSource="{Binding Suppliers}" DisplayMemberPath="DisplayName"
                         SelectedItem="{Binding SelectedSupplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         materialDesign:HintAssist.Hint="Supplier" IsEditable="True" 
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>

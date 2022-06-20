@@ -20,8 +20,9 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         x:Name="window"
+        DataContext="{StaticResource SupplierVM}"
         
-        Title="Supplier" Height="500" Width="600">
+        Title="Supplier" Height="500" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -69,7 +70,7 @@
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                       VerticalAlignment="Center"/>
 
-                    <DatePicker Margin="5 5 15 5" SelectedDate="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged}"
+                    <DatePicker Margin="5 5 15 5" SelectedDate="{Binding ContractDate, UpdateSourceTrigger=PropertyChanged}"
                                 VerticalAlignment="Center" Width="100" materialDesign:HintAssist.Hint="Contract Date"
                       Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                 </WrapPanel>
@@ -96,7 +97,7 @@
                                 <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"/>
                                 <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
                                 <GridViewColumn Header="More info" DisplayMemberBinding="{Binding MoreInfo}"/>
-                                <GridViewColumn Header="Contract Date" DisplayMemberBinding="{Binding ContractDate}"/>
+                                <GridViewColumn Header="Contract Date" DisplayMemberBinding="{Binding ContractDate, StringFormat = 'dd/MM/yyyy'}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

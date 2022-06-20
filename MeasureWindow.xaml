@@ -19,8 +19,10 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         x:Name="window"
+        DataContext="{StaticResource MeasureVM}"
         
-        Title="Measure Window" Height="300" Width="400">
+        Title="Measure Window" Height="500
+        " Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -43,7 +45,7 @@
             <!--Element Binding from Selected Item-->
             <materialDesign:Card Grid.Row="0" Margin="5">
                 <Grid>
-                    <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Margin="5"
+                    <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5"
                       materialDesign:HintAssist.Hint="Unit of measure"
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                       VerticalAlignment="Center"/>
@@ -62,7 +64,7 @@
             <!--Item-->
             <materialDesign:Card Grid.Row="2" Margin="5" VerticalAlignment="Stretch">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>

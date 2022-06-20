@@ -123,18 +123,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ExportInf__IdImp__3D5E1FD2">
-          <End Role="ImportInfo" Type="Self.ImportInfo" Multiplicity="1" />
-          <End Role="ExportInfo" Type="Self.ExportInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ImportInfo">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ExportInfo">
-              <PropertyRef Name="IdExportInfo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ExportInf__Statu__3C69FB99">
           <End Role="Supply" Type="Self.Supply" Multiplicity="1" />
           <End Role="ExportInfo" Type="Self.ExportInfo" Multiplicity="*" />
@@ -235,10 +223,6 @@
             <End Role="Customer" EntitySet="Customer" />
             <End Role="ExportInfo" EntitySet="ExportInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__ExportInf__IdImp__3D5E1FD2" Association="Self.FK__ExportInf__IdImp__3D5E1FD2">
-            <End Role="ImportInfo" EntitySet="ImportInfo" />
-            <End Role="ExportInfo" EntitySet="ExportInfo" />
-          </AssociationSet>
           <AssociationSet Name="FK__ExportInf__Statu__3C69FB99" Association="Self.FK__ExportInf__Statu__3C69FB99">
             <End Role="Supply" EntitySet="Supply" />
             <End Role="ExportInfo" EntitySet="ExportInfo" />
@@ -306,7 +290,6 @@
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Customer" Relationship="Self.FK__ExportInf__IdCus__3E52440B" FromRole="ExportInfo" ToRole="Customer" />
           <NavigationProperty Name="Export" Relationship="Self.FK_ExportInfo_Export" FromRole="ExportInfo" ToRole="Export" />
-          <NavigationProperty Name="ImportInfo" Relationship="Self.FK__ExportInf__IdImp__3D5E1FD2" FromRole="ExportInfo" ToRole="ImportInfo" />
           <NavigationProperty Name="Supply" Relationship="Self.FK__ExportInf__Statu__3C69FB99" FromRole="ExportInfo" ToRole="Supply" />
         </EntityType>
         <EntityType Name="Import">
@@ -328,7 +311,6 @@
           <Property Name="ImportPrice" Type="Double" />
           <Property Name="ExportPrice" Type="Double" />
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ExportInfoes" Relationship="Self.FK__ExportInf__IdImp__3D5E1FD2" FromRole="ImportInfo" ToRole="ExportInfo" />
           <NavigationProperty Name="Import" Relationship="Self.FK__ImportInf__IdImp__37A5467C" FromRole="ImportInfo" ToRole="Import" />
           <NavigationProperty Name="Supply" Relationship="Self.FK__ImportInf__Statu__36B12243" FromRole="ImportInfo" ToRole="Supply" />
         </EntityType>
@@ -421,18 +403,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ExportInf__IdImp__3D5E1FD2">
-          <End Role="ImportInfo" Type="Self.ImportInfo" Multiplicity="1" />
-          <End Role="ExportInfo" Type="Self.ExportInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ImportInfo">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ExportInfo">
-              <PropertyRef Name="IdExportInfo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ExportInf__Statu__3C69FB99">
           <End Role="Supply" Type="Self.Supply" Multiplicity="1" />
           <End Role="ExportInfo" Type="Self.ExportInfo" Multiplicity="*" />
@@ -505,7 +475,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QuanLyKhoHangEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QuanLyKhoHang" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Exports" EntityType="Self.Export" />
           <EntitySet Name="ExportInfoes" EntityType="Self.ExportInfo" />
@@ -523,10 +493,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_ExportInfo_Export" Association="Self.FK_ExportInfo_Export">
             <End Role="Export" EntitySet="Exports" />
-            <End Role="ExportInfo" EntitySet="ExportInfoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ExportInf__IdImp__3D5E1FD2" Association="Self.FK__ExportInf__IdImp__3D5E1FD2">
-            <End Role="ImportInfo" EntitySet="ImportInfoes" />
             <End Role="ExportInfo" EntitySet="ExportInfoes" />
           </AssociationSet>
           <AssociationSet Name="FK__ExportInf__Statu__3C69FB99" Association="Self.FK__ExportInf__Statu__3C69FB99">
@@ -559,7 +525,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QuanLyKhoHangModelStoreContainer" CdmEntityContainer="QuanLyKhoHangEntities">
+        <EntityContainerMapping StorageEntityContainer="QuanLyKhoHangModelStoreContainer" CdmEntityContainer="QuanLyKhoHang">
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="QuanLyKhoHangModel.Customer">
               <MappingFragment StoreEntitySet="Customer">

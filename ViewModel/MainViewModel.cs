@@ -1,5 +1,7 @@
-﻿using System;
+﻿using QuanLyKhoHangCBNV.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,8 @@ namespace QuanLyKhoHangCBNV.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        private ObservableCollection<Warehouse> _WarehouseList;
+        public ObservableCollection<Warehouse> WarehouseList { get { return _WarehouseList; } set { _WarehouseList = value; OnPropertyChanged(); } }
         public bool isLoaded = false;
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand MeasureCommand { get; set; }
@@ -38,6 +42,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 if (loginVM.IsLoggedIn)
                 {
                     p.Show();
+                    LoadWareHouseData();
                 }
                 else
                 {
@@ -87,6 +92,43 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 exportWindow.ShowDialog();
             }
             );
+        }
+
+        void LoadWareHouseData()
+        {
+            WarehouseList = new ObservableCollection<Warehouse>();
+
+            var SupplyList = DataProvider.Ins.DB.Supplies;
+
+            int i = 1;
+
+            foreach(var Supply in SupplyList)
+            {
+                var importList = DataProvider.Ins.DB.ImportInfoes.Where(p => p.IdSupply == Supply.Id);
+                var exportList = DataProvider.Ins.DB.ExportInfoes.Where(p => p.IdSupply == Supply.Id);
+
+                int sumImport = 0;
+                int sumExport = 0;
+
+                if(importList != null && importList.Count() > 0)
+                {
+                    sumImport = (int) importList.Sum(p=>p.Quantity);
+                }
+
+                if(exportList != null && importList.Count() > 0)
+                {
+                    sumExport = (int) exportList.Sum(p=>p.Quantity);
+                }
+
+                Warehouse warehouse = new Warehouse();
+                warehouse.No = i;
+                warehouse.Count = sumImport - sumExport;
+                warehouse.Supply = Supply;
+
+                WarehouseList.Add(warehouse);
+
+                i++;
+            }
         }
     }
 }

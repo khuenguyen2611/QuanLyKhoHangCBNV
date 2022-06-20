@@ -14,12 +14,6 @@ namespace QuanLyKhoHangCBNV.Model
     
     public partial class ImportInfo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ImportInfo()
-        {
-            this.ExportInfoes = new HashSet<ExportInfo>();
-        }
-    
         public string Id { get; set; }
         public string IdSupply { get; set; }
         public string IdImport { get; set; }
@@ -28,8 +22,6 @@ namespace QuanLyKhoHangCBNV.Model
         public Nullable<double> ExportPrice { get; set; }
         public string Status { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExportInfo> ExportInfoes { get; set; }
         public virtual Import Import { get; set; }
         public virtual Supply Supply { get; set; }
     }

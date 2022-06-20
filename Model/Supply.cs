@@ -9,10 +9,11 @@
 
 namespace QuanLyKhoHangCBNV.Model
 {
+    using QuanLyKhoHangCBNV.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class Supply
+    public partial class Supply : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supply()
@@ -20,19 +21,33 @@ namespace QuanLyKhoHangCBNV.Model
             this.ExportInfoes = new HashSet<ExportInfo>();
             this.ImportInfoes = new HashSet<ImportInfo>();
         }
-    
-        public string Id { get; set; }
-        public string DisplayName { get; set; }
-        public int IdMeasure { get; set; }
-        public int IdSupplier { get; set; }
-        public string QRCode { get; set; }
-        public string BarCode { get; set; }
+
+        //Id
+        private string _Id;
+        public string Id { get { return _Id; } set { _Id = value; OnPropertyChanged(); } }
+        //DisplayName
+        private string _DisplayName;
+        public string DisplayName { get { return _DisplayName; } set { _DisplayName = value; OnPropertyChanged(); } }
+        //Measure
+        private int _IdMeasure;
+        public int IdMeasure { get => _IdMeasure; set { _IdMeasure = value; OnPropertyChanged(); } }
+        //IdSupplier
+        private int _IdSupplier;
+        public int IdSupplier { get { return _IdSupplier; } set { _IdSupplier = value; OnPropertyChanged(); } }
+        //QRCode
+        private string _QRCode;
+        public string QRCode { get { return _QRCode; } set { _QRCode = value; OnPropertyChanged(); } }
+        //BarCode
+        private string _BarCode;
+        public string BarCode { get => _BarCode; set { _BarCode = value; OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExportInfo> ExportInfoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ImportInfo> ImportInfoes { get; set; }
-        public virtual Measure Measure { get; set; }
-        public virtual Supplier Supplier { get; set; }
+        private  Measure _Measure;
+        public virtual Measure Measure { get => _Measure; set { _Measure = value; OnPropertyChanged(); } }
+        private Supplier _Supplier;
+        public virtual Supplier Supplier { get => _Supplier; set { _Supplier = value; OnPropertyChanged(); } }
     }
 }
