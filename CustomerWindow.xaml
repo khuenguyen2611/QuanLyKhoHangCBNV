@@ -20,6 +20,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         x:Name="window"
+        DataContext="{StaticResource CustomerVM}"
         
         Title="Customer" Height="500" Width="600">
     <Grid>
@@ -96,7 +97,7 @@
                                 <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"/>
                                 <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
                                 <GridViewColumn Header="More info" DisplayMemberBinding="{Binding MoreInfo}"/>
-                                <GridViewColumn Header="Contract Date" DisplayMemberBinding="{Binding ContractDate}"/>
+                                <GridViewColumn Header="Contract Date" DisplayMemberBinding="{Binding ContractDate, StringFormat = 'dd/MM/yyyy'}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

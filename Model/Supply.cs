@@ -21,22 +21,20 @@ namespace QuanLyKhoHangCBNV.Model
             this.ExportInfoes = new HashSet<ExportInfo>();
             this.ImportInfoes = new HashSet<ImportInfo>();
         }
-
-        //Id
-        private string _Id;
-        public string Id { get { return _Id; } set { _Id = value; OnPropertyChanged(); } }
+    
+        public string Id { get; set; }
         //DisplayName
         private string _DisplayName;
-        public string DisplayName { get { return _DisplayName; } set { _DisplayName = value; OnPropertyChanged(); } }
-        //Measure
+        public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
+        //IdMeasure
         private int _IdMeasure;
         public int IdMeasure { get => _IdMeasure; set { _IdMeasure = value; OnPropertyChanged(); } }
         //IdSupplier
         private int _IdSupplier;
-        public int IdSupplier { get { return _IdSupplier; } set { _IdSupplier = value; OnPropertyChanged(); } }
+        public int IdSupplier { get => _IdSupplier; set { _IdSupplier = value; OnPropertyChanged(); } }
         //QRCode
         private string _QRCode;
-        public string QRCode { get { return _QRCode; } set { _QRCode = value; OnPropertyChanged(); } }
+        public string QRCode { get => _QRCode; set { _QRCode = value; OnPropertyChanged(); } }
         //BarCode
         private string _BarCode;
         public string BarCode { get => _BarCode; set { _BarCode = value; OnPropertyChanged(); } }
@@ -45,8 +43,10 @@ namespace QuanLyKhoHangCBNV.Model
         public virtual ICollection<ExportInfo> ExportInfoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ImportInfo> ImportInfoes { get; set; }
-        private  Measure _Measure;
+        //Measure
+        private Measure _Measure;
         public virtual Measure Measure { get => _Measure; set { _Measure = value; OnPropertyChanged(); } }
+        //Supplier
         private Supplier _Supplier;
         public virtual Supplier Supplier { get => _Supplier; set { _Supplier = value; OnPropertyChanged(); } }
     }

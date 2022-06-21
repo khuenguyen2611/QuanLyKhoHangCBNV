@@ -88,7 +88,7 @@
                     <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                                <!--<GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>-->
                                 <GridViewColumn Header="Supply Name" DisplayMemberBinding="{Binding DisplayName}"/>
                                 <GridViewColumn Header="Unit of Measure" DisplayMemberBinding="{Binding Measure.DisplayName}"/>
                                 <GridViewColumn Header="Supplier" DisplayMemberBinding="{Binding Supplier.DisplayName}"/>

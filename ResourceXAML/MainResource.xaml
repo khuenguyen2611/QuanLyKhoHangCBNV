@@ -7,4 +7,6 @@
     <viewmodel:MeasureViewModel x:Key="MeasureVM"/>
     <viewmodel:SupplierViewModel x:Key="SupplierVM"/>
     <viewmodel:SupplyViewModel x:Key="SupplyVM"/>
+    <viewmodel:CustomerViewModel x:Key="CustomerVM"/>
+    <viewmodel:UserViewModel x:Key="UserVM"/>
 </ResourceDictionary>

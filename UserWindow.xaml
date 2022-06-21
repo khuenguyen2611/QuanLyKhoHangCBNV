@@ -20,6 +20,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         x:Name="window"
+        DataContext="{StaticResource UserVM}"
         
         Title="Account" Height="500" Width="600">
     <Grid>
@@ -49,7 +50,7 @@
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                       VerticalAlignment="Center"/>
 
-                    <ComboBox ItemsSource="{Binding Role}" 
+                    <ComboBox ItemsSource="{Binding Role}" DisplayMemberPath="DisplayName" 
                               SelectedItem="{Binding SelectedRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         materialDesign:HintAssist.Hint="Role"
                               IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
@@ -79,7 +80,7 @@
                             <GridView>
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                                 <GridViewColumn Header="Username" DisplayMemberBinding="{Binding UserName}"/>
-                                <GridViewColumn Header="Role" DisplayMemberBinding="{Binding Role.DisplayName}"/>
+                                <GridViewColumn Header="Role" DisplayMemberBinding="{Binding UserRole.DisplayName}"/>
                                 <GridViewColumn Header="Display Name" DisplayMemberBinding="{Binding DisplayName}"/>
                             </GridView>
                         </ListView.View>

@@ -65,7 +65,7 @@
 
                     <ComboBox ItemsSource="{Binding Customer.DisplayName}" 
                               SelectedItem="{Binding SelectedCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        materialDesign:HintAssist.Hint="Role"
+                        materialDesign:HintAssist.Hint="Customer"
                               IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
 
                     <TextBox Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5"

@@ -22,23 +22,23 @@ namespace QuanLyKhoHangCBNV.Model
         }
     
         public int Id { get; set; }
-
+        //DisplayName
         private string _DisplayName;
-        public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); }}
-
+        public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
+        //Address
         private string _Address;
         public string Address { get => _Address; set { _Address = value; OnPropertyChanged(); } }
-
+        //Phone
         private string _Phone;
         public string Phone { get => _Phone; set { _Phone = value; OnPropertyChanged(); } }
-
+        //Email
         private string _Email;
         public string Email { get => _Email; set { _Email = value; OnPropertyChanged(); } }
-
+        //MoreInfo
         private string _MoreInfo;
         public string MoreInfo { get => _MoreInfo; set { _MoreInfo = value; OnPropertyChanged(); } }
-
-        Nullable<DateTime> _ContractDate;
+        //Date
+        private Nullable<System.DateTime> _ContractDate;
         public Nullable<System.DateTime> ContractDate { get => _ContractDate; set { _ContractDate = value; OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

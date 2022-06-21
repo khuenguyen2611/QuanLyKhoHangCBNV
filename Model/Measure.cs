@@ -22,15 +22,11 @@ namespace QuanLyKhoHangCBNV.Model
         }
     
         public int Id { get; set; }
+        //DisplayName
         private string _DisplayName;
         public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supply> Supplies { get; set; }
-
-        public static implicit operator Measure(Supply v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

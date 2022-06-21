@@ -9,17 +9,27 @@
 
 namespace QuanLyKhoHangCBNV.Model
 {
+    using QuanLyKhoHangCBNV.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class User : BaseViewModel
     {
         public int Id { get; set; }
-        public string DisplayName { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public int IdRole { get; set; }
-    
-        public virtual UserRole UserRole { get; set; }
+        //DisplayName
+        private string _DisplayName;
+        public string DisplayName { get => DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
+        //UserName
+        private string _UserName;
+        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
+        //Password
+        private string _Password;
+        public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
+        //Role
+        private int _IdRole;
+        public int IdRole { get => _IdRole; set { _IdRole = value; OnPropertyChanged(); } }
+
+        private UserRole _UserRole;
+        public virtual UserRole UserRole { get => _UserRole; set { _UserRole = value; OnPropertyChanged(); } }
     }
 }
