@@ -18,7 +18,7 @@ namespace QuanLyKhoHangCBNV.Model
         public int Id { get; set; }
         //DisplayName
         private string _DisplayName;
-        public string DisplayName { get => DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
+        public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
         //UserName
         private string _UserName;
         public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }

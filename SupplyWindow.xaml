@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyKhoHangCBNV"
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         
         xmlns:uc="clr-namespace:QuanLyKhoHangCBNV.UserControlCBNV"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -23,6 +24,20 @@
         DataContext="{StaticResource SupplyVM}"
         
         Title="SupplyWindow" Height="500" Width="600">
+    <Window.Resources>
+        <CollectionViewSource x:Key="MeasureAlphabet" Source="{Binding Measures}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="DisplayName"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+
+        <CollectionViewSource x:Key="SupplierAlphabet" Source="{Binding Suppliers}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="DisplayName"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -50,12 +65,12 @@
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                       VerticalAlignment="Center"/>
 
-                    <ComboBox ItemsSource="{Binding Measures}" DisplayMemberPath="DisplayName"
+                    <ComboBox ItemsSource="{Binding Source={StaticResource MeasureAlphabet}}" DisplayMemberPath="DisplayName" 
                               SelectedItem="{Binding SelectedMeasure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         materialDesign:HintAssist.Hint="Measure"
                               IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
 
-                    <ComboBox ItemsSource="{Binding Suppliers}" DisplayMemberPath="DisplayName"
+                    <ComboBox ItemsSource="{Binding Source={StaticResource SupplierAlphabet}}" DisplayMemberPath="DisplayName"
                         SelectedItem="{Binding SelectedSupplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         materialDesign:HintAssist.Hint="Supplier" IsEditable="True" 
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>

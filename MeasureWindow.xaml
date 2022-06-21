@@ -23,6 +23,7 @@
         
         Title="Measure Window" Height="500
         " Width="400">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>

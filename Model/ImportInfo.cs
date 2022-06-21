@@ -9,20 +9,37 @@
 
 namespace QuanLyKhoHangCBNV.Model
 {
+    using QuanLyKhoHangCBNV.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class ImportInfo
+    public partial class ImportInfo : BaseViewModel
     {
-        public string Id { get; set; }
-        public string IdSupply { get; set; }
-        public string IdImport { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<double> ImportPrice { get; set; }
-        public Nullable<double> ExportPrice { get; set; }
-        public string Status { get; set; }
-    
-        public virtual Import Import { get; set; }
-        public virtual Supply Supply { get; set; }
+        //Id
+        private string _Id;
+        public string Id { get => _Id; set { _Id = value;  OnPropertyChanged(); } }
+        //IdSupply
+        private string _IdSupply;
+        public string IdSupply { get => _IdSupply; set { _IdSupply = value; OnPropertyChanged(); } }
+        //IdImport
+        private string _IdImport;
+        public string IdImport { get => _IdImport; set { _IdImport = value; OnPropertyChanged(); } }
+        //Quantity
+        private Nullable<int> _Quantity;
+        public Nullable<int> Quantity { get => _Quantity; set { _Quantity = value; OnPropertyChanged(); } }
+        //Import Price
+        private Nullable<double> _ImportPrice;
+        public Nullable<double> ImportPrice { get => _ImportPrice; set { _ImportPrice = value; OnPropertyChanged(); } }
+        //Export Price
+        private Nullable<double> _ExportPrice;
+        public Nullable<double> ExportPrice { get => _ExportPrice; set { _ExportPrice = value; OnPropertyChanged(); } }
+        //Status
+        private string _Status;
+        public string Status { get => _Status; set { _Status = value; OnPropertyChanged(); } }
+
+        private Import _Import;
+        public virtual Import Import { get => _Import; set { _Import = value; OnPropertyChanged(); } }
+        private Supply _Supply;
+        public virtual Supply Supply { get => _Supply; set { _Supply = value; OnPropertyChanged(); } }
     }
 }
