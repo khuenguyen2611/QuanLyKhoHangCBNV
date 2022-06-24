@@ -34,6 +34,7 @@
           <Property Name="IdCustomer" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" />
           <Property Name="Status" Type="varchar(max)" />
+          <Property Name="ExportPrice" Type="float" />
         </EntityType>
         <EntityType Name="Import">
           <Key>
@@ -51,7 +52,6 @@
           <Property Name="IdImport" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="Quantity" Type="int" />
           <Property Name="ImportPrice" Type="float" />
-          <Property Name="ExportPrice" Type="float" />
           <Property Name="Status" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Measure">
@@ -111,8 +111,10 @@
           <Property Name="Password" Type="varchar(max)" />
           <Property Name="IdRole" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__ExportInf__IdCus__3E52440B">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+        <Association Name="FK__ExportInf__IdCus__37A5467C">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ExportInfo" Type="Self.ExportInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -123,8 +125,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ExportInf__Statu__3C69FB99">
-          <End Role="Supply" Type="Self.Supply" Multiplicity="1" />
+        <Association Name="FK__ExportInf__IdSup__38996AB5">
+          <End Role="Supply" Type="Self.Supply" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ExportInfo" Type="Self.ExportInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supply">
@@ -135,8 +139,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ImportInf__IdImp__37A5467C">
-          <End Role="Import" Type="Self.Import" Multiplicity="1" />
+        <Association Name="FK__ImportInf__IdImp__3A81B327">
+          <End Role="Import" Type="Self.Import" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ImportInfo" Type="Self.ImportInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Import">
@@ -147,8 +153,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ImportInf__Statu__36B12243">
-          <End Role="Supply" Type="Self.Supply" Multiplicity="1" />
+        <Association Name="FK__ImportInf__IdSup__3B75D760">
+          <End Role="Supply" Type="Self.Supply" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ImportInfo" Type="Self.ImportInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supply">
@@ -159,8 +167,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Supply__BarCode__2A4B4B5E">
-          <End Role="Measure" Type="Self.Measure" Multiplicity="1" />
+        <Association Name="FK__Supply__IdMeasur__3C69FB99">
+          <End Role="Measure" Type="Self.Measure" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Measure">
@@ -171,20 +181,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Supply__IdSuppli__2B3F6F97">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
-          <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Supply">
-              <PropertyRef Name="IdSupplier" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Users__IdRole__300424B4">
-          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+        <Association Name="FK__Users__IdRole__3E52440B">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserRole">
@@ -196,7 +196,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExportInfo_Export">
-          <End Role="Export" Type="Self.Export" Multiplicity="1" />
+          <End Role="Export" Type="Self.Export" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ExportInfo" Type="Self.ExportInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Export">
@@ -204,6 +206,20 @@
             </Principal>
             <Dependent Role="ExportInfo">
               <PropertyRef Name="IdExportInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supply">
+              <PropertyRef Name="IdSupplier" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -219,37 +235,37 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__ExportInf__IdCus__3E52440B" Association="Self.FK__ExportInf__IdCus__3E52440B">
+          <AssociationSet Name="FK__ExportInf__IdCus__37A5467C" Association="Self.FK__ExportInf__IdCus__37A5467C">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="ExportInfo" EntitySet="ExportInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__ExportInf__Statu__3C69FB99" Association="Self.FK__ExportInf__Statu__3C69FB99">
+          <AssociationSet Name="FK__ExportInf__IdSup__38996AB5" Association="Self.FK__ExportInf__IdSup__38996AB5">
             <End Role="Supply" EntitySet="Supply" />
             <End Role="ExportInfo" EntitySet="ExportInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__ImportInf__IdImp__37A5467C" Association="Self.FK__ImportInf__IdImp__37A5467C">
+          <AssociationSet Name="FK__ImportInf__IdImp__3A81B327" Association="Self.FK__ImportInf__IdImp__3A81B327">
             <End Role="Import" EntitySet="Import" />
             <End Role="ImportInfo" EntitySet="ImportInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__ImportInf__Statu__36B12243" Association="Self.FK__ImportInf__Statu__36B12243">
+          <AssociationSet Name="FK__ImportInf__IdSup__3B75D760" Association="Self.FK__ImportInf__IdSup__3B75D760">
             <End Role="Supply" EntitySet="Supply" />
             <End Role="ImportInfo" EntitySet="ImportInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__Supply__BarCode__2A4B4B5E" Association="Self.FK__Supply__BarCode__2A4B4B5E">
+          <AssociationSet Name="FK__Supply__IdMeasur__3C69FB99" Association="Self.FK__Supply__IdMeasur__3C69FB99">
             <End Role="Measure" EntitySet="Measure" />
             <End Role="Supply" EntitySet="Supply" />
           </AssociationSet>
-          <AssociationSet Name="FK__Supply__IdSuppli__2B3F6F97" Association="Self.FK__Supply__IdSuppli__2B3F6F97">
-            <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="Supply" EntitySet="Supply" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Users__IdRole__300424B4" Association="Self.FK__Users__IdRole__300424B4">
+          <AssociationSet Name="FK__Users__IdRole__3E52440B" Association="Self.FK__Users__IdRole__3E52440B">
             <End Role="UserRole" EntitySet="UserRole" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_ExportInfo_Export" Association="Self.FK_ExportInfo_Export">
             <End Role="Export" EntitySet="Export" />
             <End Role="ExportInfo" EntitySet="ExportInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_Supplier" Association="Self.FK_Supply_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Supply" EntitySet="Supply" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -268,7 +284,7 @@
           <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ContractDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ExportInfoes" Relationship="Self.FK__ExportInf__IdCus__3E52440B" FromRole="Customer" ToRole="ExportInfo" />
+          <NavigationProperty Name="ExportInfoes" Relationship="Self.FK__ExportInf__IdCus__37A5467C" FromRole="Customer" ToRole="ExportInfo" />
         </EntityType>
         <EntityType Name="Export">
           <Key>
@@ -288,9 +304,10 @@
           <Property Name="IdCustomer" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK__ExportInf__IdCus__3E52440B" FromRole="ExportInfo" ToRole="Customer" />
+          <Property Name="ExportPrice" Type="Double" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__ExportInf__IdCus__37A5467C" FromRole="ExportInfo" ToRole="Customer" />
           <NavigationProperty Name="Export" Relationship="Self.FK_ExportInfo_Export" FromRole="ExportInfo" ToRole="Export" />
-          <NavigationProperty Name="Supply" Relationship="Self.FK__ExportInf__Statu__3C69FB99" FromRole="ExportInfo" ToRole="Supply" />
+          <NavigationProperty Name="Supply" Relationship="Self.FK__ExportInf__IdSup__38996AB5" FromRole="ExportInfo" ToRole="Supply" />
         </EntityType>
         <EntityType Name="Import">
           <Key>
@@ -298,7 +315,7 @@
           </Key>
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateImport" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ImportInfoes" Relationship="Self.FK__ImportInf__IdImp__37A5467C" FromRole="Import" ToRole="ImportInfo" />
+          <NavigationProperty Name="ImportInfoes" Relationship="Self.FK__ImportInf__IdImp__3A81B327" FromRole="Import" ToRole="ImportInfo" />
         </EntityType>
         <EntityType Name="ImportInfo">
           <Key>
@@ -309,10 +326,9 @@
           <Property Name="IdImport" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="ImportPrice" Type="Double" />
-          <Property Name="ExportPrice" Type="Double" />
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Import" Relationship="Self.FK__ImportInf__IdImp__37A5467C" FromRole="ImportInfo" ToRole="Import" />
-          <NavigationProperty Name="Supply" Relationship="Self.FK__ImportInf__Statu__36B12243" FromRole="ImportInfo" ToRole="Supply" />
+          <NavigationProperty Name="Import" Relationship="Self.FK__ImportInf__IdImp__3A81B327" FromRole="ImportInfo" ToRole="Import" />
+          <NavigationProperty Name="Supply" Relationship="Self.FK__ImportInf__IdSup__3B75D760" FromRole="ImportInfo" ToRole="Supply" />
         </EntityType>
         <EntityType Name="Measure">
           <Key>
@@ -320,7 +336,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Supplies" Relationship="Self.FK__Supply__BarCode__2A4B4B5E" FromRole="Measure" ToRole="Supply" />
+          <NavigationProperty Name="Supplies" Relationship="Self.FK__Supply__IdMeasur__3C69FB99" FromRole="Measure" ToRole="Supply" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -333,7 +349,7 @@
           <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ContractDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Supplies" Relationship="Self.FK__Supply__IdSuppli__2B3F6F97" FromRole="Supplier" ToRole="Supply" />
+          <NavigationProperty Name="Supplies" Relationship="Self.FK_Supply_Supplier" FromRole="Supplier" ToRole="Supply" />
         </EntityType>
         <EntityType Name="Supply">
           <Key>
@@ -345,10 +361,10 @@
           <Property Name="IdSupplier" Type="Int32" Nullable="false" />
           <Property Name="QRCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="BarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ExportInfoes" Relationship="Self.FK__ExportInf__Statu__3C69FB99" FromRole="Supply" ToRole="ExportInfo" />
-          <NavigationProperty Name="ImportInfoes" Relationship="Self.FK__ImportInf__Statu__36B12243" FromRole="Supply" ToRole="ImportInfo" />
-          <NavigationProperty Name="Measure" Relationship="Self.FK__Supply__BarCode__2A4B4B5E" FromRole="Supply" ToRole="Measure" />
-          <NavigationProperty Name="Supplier" Relationship="Self.FK__Supply__IdSuppli__2B3F6F97" FromRole="Supply" ToRole="Supplier" />
+          <NavigationProperty Name="ExportInfoes" Relationship="Self.FK__ExportInf__IdSup__38996AB5" FromRole="Supply" ToRole="ExportInfo" />
+          <NavigationProperty Name="ImportInfoes" Relationship="Self.FK__ImportInf__IdSup__3B75D760" FromRole="Supply" ToRole="ImportInfo" />
+          <NavigationProperty Name="Measure" Relationship="Self.FK__Supply__IdMeasur__3C69FB99" FromRole="Supply" ToRole="Measure" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Supply_Supplier" FromRole="Supply" ToRole="Supplier" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -366,7 +382,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Users" Relationship="Self.FK__Users__IdRole__300424B4" FromRole="UserRole" ToRole="Users" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__IdRole__3E52440B" FromRole="UserRole" ToRole="Users" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -377,10 +393,12 @@
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IdRole" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UserRole" Relationship="Self.FK__Users__IdRole__300424B4" FromRole="Users" ToRole="UserRole" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK__Users__IdRole__3E52440B" FromRole="Users" ToRole="UserRole" />
         </EntityType>
-        <Association Name="FK__ExportInf__IdCus__3E52440B">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+        <Association Name="FK__ExportInf__IdCus__37A5467C">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ExportInfo" Type="Self.ExportInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -392,7 +410,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExportInfo_Export">
-          <End Role="Export" Type="Self.Export" Multiplicity="1" />
+          <End Role="Export" Type="Self.Export" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ExportInfo" Type="Self.ExportInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Export">
@@ -403,8 +423,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ExportInf__Statu__3C69FB99">
-          <End Role="Supply" Type="Self.Supply" Multiplicity="1" />
+        <Association Name="FK__ExportInf__IdSup__38996AB5">
+          <End Role="Supply" Type="Self.Supply" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ExportInfo" Type="Self.ExportInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supply">
@@ -415,8 +437,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ImportInf__IdImp__37A5467C">
-          <End Role="Import" Type="Self.Import" Multiplicity="1" />
+        <Association Name="FK__ImportInf__IdImp__3A81B327">
+          <End Role="Import" Type="Self.Import" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ImportInfo" Type="Self.ImportInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Import">
@@ -427,8 +451,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ImportInf__Statu__36B12243">
-          <End Role="Supply" Type="Self.Supply" Multiplicity="1" />
+        <Association Name="FK__ImportInf__IdSup__3B75D760">
+          <End Role="Supply" Type="Self.Supply" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ImportInfo" Type="Self.ImportInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supply">
@@ -439,8 +465,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Supply__BarCode__2A4B4B5E">
-          <End Role="Measure" Type="Self.Measure" Multiplicity="1" />
+        <Association Name="FK__Supply__IdMeasur__3C69FB99">
+          <End Role="Measure" Type="Self.Measure" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Measure">
@@ -451,8 +479,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Supply__IdSuppli__2B3F6F97">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+        <Association Name="FK_Supply_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplier">
@@ -463,8 +493,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Users__IdRole__300424B4">
-          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+        <Association Name="FK__Users__IdRole__3E52440B">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserRole">
@@ -475,7 +507,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QuanLyKhoHang" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QuanLyKhoHangEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Exports" EntityType="Self.Export" />
           <EntitySet Name="ExportInfoes" EntityType="Self.ExportInfo" />
@@ -487,7 +519,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK__ExportInf__IdCus__3E52440B" Association="Self.FK__ExportInf__IdCus__3E52440B">
+          <AssociationSet Name="FK__ExportInf__IdCus__37A5467C" Association="Self.FK__ExportInf__IdCus__37A5467C">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="ExportInfo" EntitySet="ExportInfoes" />
           </AssociationSet>
@@ -495,27 +527,27 @@
             <End Role="Export" EntitySet="Exports" />
             <End Role="ExportInfo" EntitySet="ExportInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__ExportInf__Statu__3C69FB99" Association="Self.FK__ExportInf__Statu__3C69FB99">
+          <AssociationSet Name="FK__ExportInf__IdSup__38996AB5" Association="Self.FK__ExportInf__IdSup__38996AB5">
             <End Role="Supply" EntitySet="Supplies" />
             <End Role="ExportInfo" EntitySet="ExportInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__ImportInf__IdImp__37A5467C" Association="Self.FK__ImportInf__IdImp__37A5467C">
+          <AssociationSet Name="FK__ImportInf__IdImp__3A81B327" Association="Self.FK__ImportInf__IdImp__3A81B327">
             <End Role="Import" EntitySet="Imports" />
             <End Role="ImportInfo" EntitySet="ImportInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__ImportInf__Statu__36B12243" Association="Self.FK__ImportInf__Statu__36B12243">
+          <AssociationSet Name="FK__ImportInf__IdSup__3B75D760" Association="Self.FK__ImportInf__IdSup__3B75D760">
             <End Role="Supply" EntitySet="Supplies" />
             <End Role="ImportInfo" EntitySet="ImportInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Supply__BarCode__2A4B4B5E" Association="Self.FK__Supply__BarCode__2A4B4B5E">
+          <AssociationSet Name="FK__Supply__IdMeasur__3C69FB99" Association="Self.FK__Supply__IdMeasur__3C69FB99">
             <End Role="Measure" EntitySet="Measures" />
             <End Role="Supply" EntitySet="Supplies" />
           </AssociationSet>
-          <AssociationSet Name="FK__Supply__IdSuppli__2B3F6F97" Association="Self.FK__Supply__IdSuppli__2B3F6F97">
+          <AssociationSet Name="FK_Supply_Supplier" Association="Self.FK_Supply_Supplier">
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="Supply" EntitySet="Supplies" />
           </AssociationSet>
-          <AssociationSet Name="FK__Users__IdRole__300424B4" Association="Self.FK__Users__IdRole__300424B4">
+          <AssociationSet Name="FK__Users__IdRole__3E52440B" Association="Self.FK__Users__IdRole__3E52440B">
             <End Role="UserRole" EntitySet="UserRoles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
@@ -525,7 +557,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QuanLyKhoHangModelStoreContainer" CdmEntityContainer="QuanLyKhoHang">
+        <EntityContainerMapping StorageEntityContainer="QuanLyKhoHangModelStoreContainer" CdmEntityContainer="QuanLyKhoHangEntities">
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="QuanLyKhoHangModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
@@ -556,6 +588,7 @@
                 <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ExportPrice" ColumnName="ExportPrice" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -575,7 +608,6 @@
                 <ScalarProperty Name="IdImport" ColumnName="IdImport" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ImportPrice" ColumnName="ImportPrice" />
-                <ScalarProperty Name="ExportPrice" ColumnName="ExportPrice" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>

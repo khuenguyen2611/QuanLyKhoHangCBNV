@@ -9,11 +9,10 @@
 
 namespace QuanLyKhoHangCBNV.Model
 {
-    using QuanLyKhoHangCBNV.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class Measure : BaseViewModel
+    public partial class Measure
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Measure()
@@ -22,9 +21,7 @@ namespace QuanLyKhoHangCBNV.Model
         }
     
         public int Id { get; set; }
-        //DisplayName
-        private string _DisplayName;
-        public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
+        public string DisplayName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supply> Supplies { get; set; }

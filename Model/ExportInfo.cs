@@ -20,6 +20,7 @@ namespace QuanLyKhoHangCBNV.Model
         public int IdCustomer { get; set; }
         public Nullable<int> Quantity { get; set; }
         public string Status { get; set; }
+        public Nullable<double> ExportPrice { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Export Export { get; set; }

@@ -62,6 +62,7 @@
                       materialDesign:HintAssist.Hint="Export Price"
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                       VerticalAlignment="Center"/>
+                    
 
                     <ComboBox ItemsSource="{Binding Customer.DisplayName}" 
                               SelectedItem="{Binding SelectedCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

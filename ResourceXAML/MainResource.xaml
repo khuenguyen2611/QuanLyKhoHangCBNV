@@ -9,4 +9,5 @@
     <viewmodel:SupplyViewModel x:Key="SupplyVM"/>
     <viewmodel:CustomerViewModel x:Key="CustomerVM"/>
     <viewmodel:UserViewModel x:Key="UserVM"/>
+    <viewmodel:ImportInfoViewModel x:Key="ImportInfoVM"/>
 </ResourceDictionary>

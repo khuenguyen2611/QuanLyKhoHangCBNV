@@ -13,10 +13,10 @@ namespace QuanLyKhoHangCBNV.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QuanLyKhoHang : DbContext
+    public partial class QuanLyKhoHangEntities : DbContext
     {
-        public QuanLyKhoHang()
-            : base("name=QuanLyKhoHang")
+        public QuanLyKhoHangEntities()
+            : base("name=QuanLyKhoHangEntities")
         {
         }
     

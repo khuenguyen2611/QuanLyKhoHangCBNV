@@ -9,11 +9,10 @@
 
 namespace QuanLyKhoHangCBNV.Model
 {
-    using QuanLyKhoHangCBNV.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class Supply : BaseViewModel
+    public partial class Supply
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supply()
@@ -23,31 +22,17 @@ namespace QuanLyKhoHangCBNV.Model
         }
     
         public string Id { get; set; }
-        //DisplayName
-        private string _DisplayName;
-        public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
-        //IdMeasure
-        private int _IdMeasure;
-        public int IdMeasure { get => _IdMeasure; set { _IdMeasure = value; OnPropertyChanged(); } }
-        //IdSupplier
-        private int _IdSupplier;
-        public int IdSupplier { get => _IdSupplier; set { _IdSupplier = value; OnPropertyChanged(); } }
-        //QRCode
-        private string _QRCode;
-        public string QRCode { get => _QRCode; set { _QRCode = value; OnPropertyChanged(); } }
-        //BarCode
-        private string _BarCode;
-        public string BarCode { get => _BarCode; set { _BarCode = value; OnPropertyChanged(); } }
+        public string DisplayName { get; set; }
+        public int IdMeasure { get; set; }
+        public int IdSupplier { get; set; }
+        public string QRCode { get; set; }
+        public string BarCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExportInfo> ExportInfoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ImportInfo> ImportInfoes { get; set; }
-        //Measure
-        private Measure _Measure;
-        public virtual Measure Measure { get => _Measure; set { _Measure = value; OnPropertyChanged(); } }
-        //Supplier
-        private Supplier _Supplier;
-        public virtual Supplier Supplier { get => _Supplier; set { _Supplier = value; OnPropertyChanged(); } }
+        public virtual Measure Measure { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }

@@ -115,7 +115,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
                     sumImport = (int) importList.Sum(p=>p.Quantity);
                 }
 
-                if(exportList != null && importList.Count() > 0)
+                if(exportList != null && exportList.Count() > 0)
                 {
                     sumExport = (int) exportList.Sum(p=>p.Quantity);
                 }

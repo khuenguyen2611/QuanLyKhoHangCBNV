@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3666288e784b4d3dac1cbb155249e171" Name="Diagram1">
+      <Diagram DiagramId="a518d70953aa47b48a6fcdd505772077" Name="Diagram1">
         <EntityTypeShape EntityType="QuanLyKhoHangModel.Customer" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyKhoHangModel.Export" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyKhoHangModel.ExportInfo" Width="1.5" PointX="5.5" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyKhoHangModel.Import" Width="1.5" PointX="6" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyKhoHangModel.ExportInfo" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyKhoHangModel.Import" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyKhoHangModel.ImportInfo" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyKhoHangModel.Measure" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyKhoHangModel.Supplier" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
@@ -16,14 +16,14 @@
         <EntityTypeShape EntityType="QuanLyKhoHangModel.sysdiagram" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyKhoHangModel.UserRole" Width="1.5" PointX="5.75" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyKhoHangModel.User" Width="1.5" PointX="8" PointY="8.875" IsExpanded="true" />
-        <AssociationConnector Association="QuanLyKhoHangModel.FK__ExportInf__IdCus__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyKhoHangModel.FK__ExportInf__IdCus__37A5467C" ManuallyRouted="false" />
         <AssociationConnector Association="QuanLyKhoHangModel.FK_ExportInfo_Export" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyKhoHangModel.FK__ExportInf__Statu__3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyKhoHangModel.FK__ImportInf__IdImp__37A5467C" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyKhoHangModel.FK__ImportInf__Statu__36B12243" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyKhoHangModel.FK__Supply__BarCode__2A4B4B5E" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyKhoHangModel.FK__Supply__IdSuppli__2B3F6F97" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyKhoHangModel.FK__Users__IdRole__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyKhoHangModel.FK__ExportInf__IdSup__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyKhoHangModel.FK__ImportInf__IdImp__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyKhoHangModel.FK__ImportInf__IdSup__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyKhoHangModel.FK__Supply__IdMeasur__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyKhoHangModel.FK_Supply_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyKhoHangModel.FK__Users__IdRole__3E52440B" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

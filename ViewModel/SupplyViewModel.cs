@@ -116,7 +116,6 @@ namespace QuanLyKhoHangCBNV.ViewModel
             }, (p) =>
             {
                 var Supply = DataProvider.Ins.DB.Supplies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                Supply.DisplayName = DisplayName;
                 DataProvider.Ins.DB.Supplies.Remove(Supply);
                 DataProvider.Ins.DB.SaveChanges();
 

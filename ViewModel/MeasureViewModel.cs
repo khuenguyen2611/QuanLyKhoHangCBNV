@@ -29,6 +29,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
         public MeasureViewModel()
         {
@@ -64,8 +65,18 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 var measure = DataProvider.Ins.DB.Measures.Where(x=>x.Id == SelectedItem.Id).SingleOrDefault();
                 measure.DisplayName = DisplayName;
                 DataProvider.Ins.DB.SaveChanges();
+            });
 
-                SelectedItem.DisplayName = DisplayName;
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                if (string.IsNullOrEmpty(DisplayName)) return false;
+                return true;
+            }, (p) =>
+            {
+                var measure = DataProvider.Ins.DB.Measures.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                DataProvider.Ins.DB.Measures.Remove(measure);
+                DataProvider.Ins.DB.SaveChanges();
+                List.Remove(measure);
             });
 
         }
