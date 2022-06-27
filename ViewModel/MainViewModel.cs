@@ -1,7 +1,5 @@
-﻿using QuanLyKhoHangCBNV.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +10,16 @@ namespace QuanLyKhoHangCBNV.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-        private ObservableCollection<Warehouse> _WarehouseList;
-        public ObservableCollection<Warehouse> WarehouseList { get { return _WarehouseList; } set { _WarehouseList = value; OnPropertyChanged(); } }
         public bool isLoaded = false;
+
+        int sumCardImport = 0;
+        public int SumCardImport { get { return sumCardImport; } set { sumCardImport = value; OnPropertyChanged(); } }
+
+        int sumCardExport = 0;
+        public int SumCardExport { get { return sumCardExport; } set { sumCardExport = value; OnPropertyChanged(); } }
+
+        int sumCardStore = 0;
+        public int SumCardStore { get => sumCardStore; set { sumCardStore = value; OnPropertyChanged(); } }
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand MeasureCommand { get; set; }
         public ICommand SupplierCommand { get; set; }
@@ -42,7 +47,6 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 if (loginVM.IsLoggedIn)
                 {
                     p.Show();
-                    LoadWareHouseData();
                 }
                 else
                 {
