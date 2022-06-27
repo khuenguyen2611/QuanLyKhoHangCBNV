@@ -31,7 +31,6 @@
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
     </Window.Resources>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -59,7 +58,7 @@
                         materialDesign:HintAssist.Hint="Supply's Name"
                               IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
 
-                    <DatePicker Margin="5 5 15 5" SelectedDate="{Binding SelectedImport.DateImport, UpdateSourceTrigger=PropertyChanged}"
+                    <DatePicker Margin="5 5 15 5" SelectedDate="{Binding DateImport, UpdateSourceTrigger=PropertyChanged}"
                                 VerticalAlignment="Center" Width="100" materialDesign:HintAssist.Hint="Import Date"
                       Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
 
@@ -99,7 +98,6 @@
                                 <GridViewColumn Header="Import Date" DisplayMemberBinding="{Binding Import.DateImport, StringFormat='dd/MM/yyyy'}"/>
                                 <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>
                                 <GridViewColumn Header="Import Price" DisplayMemberBinding="{Binding ImportPrice}"/>
-                                <GridViewColumn Header="Export Price" DisplayMemberBinding="{Binding ExportPrice}"/>
                                 <GridViewColumn Header="Import Status" DisplayMemberBinding="{Binding Status}"/>
                             </GridView>
                         </ListView.View>

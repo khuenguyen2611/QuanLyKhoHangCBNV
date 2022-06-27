@@ -4,10 +4,12 @@
                     >
     <viewmodel:MainViewModel x:Key="MainVM"/>
     <viewmodel:LoginViewModel x:Key="LoginVM"/>
+    <viewmodel:ChangePasswordViewModel x:Key="ChangePwVM"/>
     <viewmodel:MeasureViewModel x:Key="MeasureVM"/>
     <viewmodel:SupplierViewModel x:Key="SupplierVM"/>
     <viewmodel:SupplyViewModel x:Key="SupplyVM"/>
     <viewmodel:CustomerViewModel x:Key="CustomerVM"/>
     <viewmodel:UserViewModel x:Key="UserVM"/>
     <viewmodel:ImportInfoViewModel x:Key="ImportInfoVM"/>
+    <viewmodel:ExportInfoViewModel x:Key="ExportInfoVM"/>
 </ResourceDictionary>

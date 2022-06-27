@@ -46,6 +46,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand ChangePasswordCommand { get; set; }
 
         public UserViewModel()
         {
@@ -101,6 +102,11 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 List.Remove(User);
             });
 
+            ChangePasswordCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                ChangePassword changePasswordWindow = new ChangePassword();
+                changePasswordWindow.ShowDialog();
+            });
         }
     }
 }

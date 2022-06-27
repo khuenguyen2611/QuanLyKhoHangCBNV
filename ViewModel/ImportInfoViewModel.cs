@@ -32,6 +32,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
                     Status = SelectedItem.Status;
                     SelectedSupply = SelectedItem.Supply;
                     SelectedImport = SelectedItem.Import;
+                    DateImport = SelectedImport.DateImport;
                 }
             }
         }
@@ -51,6 +52,9 @@ namespace QuanLyKhoHangCBNV.ViewModel
         //Status
         private string _Status;
         public string Status { get => _Status; set { _Status = value; OnPropertyChanged(); } }
+        //DateImport
+        private DateTime? _DateImport;
+        public DateTime? DateImport { get => _DateImport; set { _DateImport = value; OnPropertyChanged(); } }
         
 
         public ICommand AddCommand { get; set; }
@@ -68,7 +72,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
             }, (p) =>
             {
                 string newIdImport = Guid.NewGuid().ToString();
-                var newImport = new Import() { Id = newIdImport, DateImport = SelectedImport.DateImport };
+                var newImport = new Import() { Id = newIdImport, DateImport = DateImport };
                 DataProvider.Ins.DB.Imports.Add(newImport);
                 DataProvider.Ins.DB.SaveChanges();
                 var ImportInfo = new ImportInfo() { Id = Guid.NewGuid().ToString(), Quantity = Quantity, ImportPrice = ImportPrice, Status = Status, IdImport = newIdImport, IdSupply = SelectedSupply.Id };
@@ -88,7 +92,13 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 return false;
             }, (p) =>
             {
-                var ImportInfo = DataProvider.Ins.DB.ImportInfoes.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                var EditImport = DataProvider.Ins.DB.Imports.Where(x => x.Id == SelectedItem.Import.Id).SingleOrDefault();
+                var EditImportInfo = DataProvider.Ins.DB.ImportInfoes.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                EditImport.DateImport = DateImport;
+                EditImportInfo.IdSupply = SelectedSupply.Id;
+                EditImportInfo.Quantity = Quantity;
+                EditImportInfo.ImportPrice = ImportPrice;
+                EditImportInfo.Status = Status;
                 
                 DataProvider.Ins.DB.SaveChanges();
             });

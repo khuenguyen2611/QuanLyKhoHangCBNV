@@ -276,22 +276,13 @@
                                                     Grid.Row="1"
                                                     Style="{StaticResource MaterialDesignLightSeparator}" />
                                             <TextBlock
-                                                Text="123456"
+                                                Text="{Binding SumCardImport}"
                                                 Grid.Row="2"
                                                 Margin="16 0 16 8"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Left"
                                                 Style="{StaticResource MaterialDesignHeadline5TextBlock}">
                                             </TextBlock>
-
-                                            <materialDesign:PopupBox Grid.Row="2"
-                                                        HorizontalAlignment="Right"
-                                                        Padding="2 0 2 0">
-                                                <StackPanel>
-                                                    <Button Content="More"/>
-                                                    <Button Content="Options"/>
-                                                </StackPanel>
-                                            </materialDesign:PopupBox>
                                         </Grid>
                                     </materialDesign:Card>
                                 </Grid>
@@ -319,22 +310,13 @@
                                                     Grid.Row="1"
                                                     Style="{StaticResource MaterialDesignLightSeparator}" />
                                             <TextBlock
-                                                Text="123456"
+                                                Text="{Binding SumCardExport}"
                                                 Grid.Row="2"
                                                 Margin="16 0 16 8"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Left"
                                                 Style="{StaticResource MaterialDesignHeadline5TextBlock}">
                                             </TextBlock>
-
-                                            <materialDesign:PopupBox Grid.Row="2"
-                                                        HorizontalAlignment="Right"
-                                                        Padding="2 0 2 0">
-                                                <StackPanel>
-                                                    <Button Content="More"/>
-                                                    <Button Content="Options"/>
-                                                </StackPanel>
-                                            </materialDesign:PopupBox>
                                         </Grid>
                                     </materialDesign:Card>
                                 </Grid>
@@ -362,22 +344,13 @@
                                                     Grid.Row="1"
                                                     Style="{StaticResource MaterialDesignLightSeparator}" />
                                             <TextBlock
-                                                Text="123456"
+                                                Text="{Binding SumCardStore}"
                                                 Grid.Row="2"
                                                 Margin="16 0 16 8"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Left"
                                                 Style="{StaticResource MaterialDesignHeadline5TextBlock}">
                                             </TextBlock>
-
-                                            <materialDesign:PopupBox Grid.Row="2"
-                                                        HorizontalAlignment="Right"
-                                                        Padding="2 0 2 0">
-                                                <StackPanel>
-                                                    <Button Content="More"/>
-                                                    <Button Content="Options"/>
-                                                </StackPanel>
-                                            </materialDesign:PopupBox>
                                         </Grid>
                                     </materialDesign:Card>
                                 </Grid>
@@ -433,7 +406,7 @@
                         </Grid>
 
                         <Grid Grid.Row="2">
-                            <ListView ItemsSource="{Binding WarehouseList}">
+                            <ListView ItemsSource="{Binding WarehouseList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="No." DisplayMemberBinding="{Binding No}"/>

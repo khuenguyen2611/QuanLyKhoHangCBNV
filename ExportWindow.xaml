@@ -9,6 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
          TextElement.FontWeight="Regular"
          TextElement.FontSize="13"
@@ -20,8 +21,22 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         x:Name="window"
+        DataContext="{StaticResource ExportInfoVM}"
         
         Title="Export Window" Height="500" Width="600">
+    <Window.Resources>
+        <CollectionViewSource x:Key="SupplyAlphabet" Source="{Binding Supplies}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="DisplayName"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+
+        <CollectionViewSource x:Key="CustomerSorted" Source="{Binding Customers}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="DisplayName"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -44,12 +59,12 @@
             <!--Element Binding from Selected Item-->
             <materialDesign:Card Grid.Row="0" Margin="5">
                 <WrapPanel Margin="0 0 0 10">
-                    <TextBox Text="{Binding SupplyDisplayName, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5"
-                      materialDesign:HintAssist.Hint="Supply's Name"
-                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                      VerticalAlignment="Center"/>
+                    <ComboBox ItemsSource="{Binding Source={StaticResource SupplyAlphabet}}" DisplayMemberPath="DisplayName" 
+                              SelectedItem="{Binding SelectedSupply, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:HintAssist.Hint="Supply's Name"
+                              IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
 
-                    <DatePicker Margin="5 5 15 5" SelectedDate="{Binding DateExport, UpdateSourceTrigger=PropertyChanged}"
+                    <DatePicker Margin="5 5 15 5" SelectedDate="{Binding ExportDate, UpdateSourceTrigger=PropertyChanged}"
                                 VerticalAlignment="Center" Width="100" materialDesign:HintAssist.Hint="Export Date"
                       Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
 
@@ -58,13 +73,13 @@
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                       VerticalAlignment="Center"/>
 
-                    <TextBox Text="{Binding PriceExport, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5"
+                    <TextBox Text="{Binding ExportPrice, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5"
                       materialDesign:HintAssist.Hint="Export Price"
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                       VerticalAlignment="Center"/>
                     
 
-                    <ComboBox ItemsSource="{Binding Customer.DisplayName}" 
+                    <ComboBox ItemsSource="{Binding Source={StaticResource CustomerSorted}}"  DisplayMemberPath="DisplayName"
                               SelectedItem="{Binding SelectedCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         materialDesign:HintAssist.Hint="Customer"
                               IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
@@ -92,9 +107,9 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Supply's Name" DisplayMemberBinding="{Binding Supply.DisplayName}"/>
-                                <GridViewColumn Header="Export Date" DisplayMemberBinding="{Binding Export.DateExport}"/>
+                                <GridViewColumn Header="Export Date" DisplayMemberBinding="{Binding Export.DateExport, StringFormat='dd/MM/yyyy'}"/>
                                 <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>
-                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Import.ExportPrice}"/>
+                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding ExportPrice}"/>
                                 <GridViewColumn Header="Customer" DisplayMemberBinding="{Binding Customer.DisplayName}"/>
                                 <GridViewColumn Header="Export Status" DisplayMemberBinding="{Binding Status}"/>
                             </GridView>

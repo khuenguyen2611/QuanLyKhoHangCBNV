@@ -16,7 +16,7 @@ namespace QuanLyKhoHangCBNV.Model
     {
         public string Id { get; set; }
         public string IdSupply { get; set; }
-        public string IdExportInfo { get; set; }
+        public string IdExport { get; set; }
         public int IdCustomer { get; set; }
         public Nullable<int> Quantity { get; set; }
         public string Status { get; set; }

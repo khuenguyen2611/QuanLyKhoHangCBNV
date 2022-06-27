@@ -1,5 +1,7 @@
-﻿using System;
+﻿using QuanLyKhoHangCBNV.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,8 @@ namespace QuanLyKhoHangCBNV.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        private ObservableCollection<Warehouse> _WarehouseList;
+        public ObservableCollection<Warehouse> WarehouseList { get { return _WarehouseList; } set { _WarehouseList = value; OnPropertyChanged(); } }
         public bool isLoaded = false;
 
         int sumCardImport = 0;
@@ -47,6 +51,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 if (loginVM.IsLoggedIn)
                 {
                     p.Show();
+                    LoadWareHouseData();
                 }
                 else
                 {
@@ -106,7 +111,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
 
             int i = 1;
 
-            foreach(var Supply in SupplyList)
+            foreach (var Supply in SupplyList)
             {
                 var importList = DataProvider.Ins.DB.ImportInfoes.Where(p => p.IdSupply == Supply.Id);
                 var exportList = DataProvider.Ins.DB.ExportInfoes.Where(p => p.IdSupply == Supply.Id);
@@ -117,11 +122,13 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 if(importList != null && importList.Count() > 0)
                 {
                     sumImport = (int) importList.Sum(p=>p.Quantity);
+                    SumCardImport += sumImport;
                 }
 
                 if(exportList != null && exportList.Count() > 0)
                 {
                     sumExport = (int) exportList.Sum(p=>p.Quantity);
+                    SumCardExport += sumExport;
                 }
 
                 Warehouse warehouse = new Warehouse();
@@ -133,6 +140,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
 
                 i++;
             }
+            SumCardStore = SumCardImport - SumCardExport;
         }
     }
 }

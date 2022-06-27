@@ -63,13 +63,13 @@ namespace QuanLyKhoHangCBNV.ViewModel
             {
                 if (string.IsNullOrEmpty(DisplayName)) return false;
 
-                var displayList = DataProvider.Ins.DB.Customers.Where(x => x.DisplayName == DisplayName);
-                if (displayList == null || displayList.Count() != 0) return false;
+                //var displayList = DataProvider.Ins.DB.Customers.Where(x => x.DisplayName == DisplayName);
+                //if (displayList == null || displayList.Count() != 0) return false;
 
                 return true;
             }, (p) =>
             {
-                var Customer = new Customer() { DisplayName = DisplayName, Phone = Phone, Address = Address, Email = Email, ContractDate = ContractDate, MoreInfo = MoreInfo };
+                var Customer = new Customer() { DisplayName = DisplayName, Phone = Phone, Address = Address, Email = Email, MoreInfo = MoreInfo, ContractDate = ContractDate  };
                 DataProvider.Ins.DB.Customers.Add(Customer);
                 DataProvider.Ins.DB.SaveChanges();
 
