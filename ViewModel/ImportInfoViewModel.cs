@@ -16,7 +16,6 @@ namespace QuanLyKhoHangCBNV.ViewModel
         //Supply
         private ObservableCollection<Supply> _Supplies;
         public ObservableCollection<Supply> Supplies { get { return _Supplies; } set { _Supplies = value; OnPropertyChanged(); } }
-
        
         private ImportInfo _SelectedItem;
         public ImportInfo SelectedItem

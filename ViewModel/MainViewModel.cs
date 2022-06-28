@@ -25,6 +25,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
         int sumCardStore = 0;
         public int SumCardStore { get => sumCardStore; set { sumCardStore = value; OnPropertyChanged(); } }
         public ICommand LoadedWindowCommand { get; set; }
+        public ICommand LoadedWareHouseCommand { get; set; }
         public ICommand MeasureCommand { get; set; }
         public ICommand SupplierCommand { get; set; }
         public ICommand CustomerCommand { get; set; }
@@ -59,6 +60,11 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 }
             }
             );
+
+            LoadedWareHouseCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                RefreshWHData();
+            });
 
             MeasureCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -128,6 +134,49 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 if(exportList != null && exportList.Count() > 0)
                 {
                     sumExport = (int) exportList.Sum(p=>p.Quantity);
+                    SumCardExport += sumExport;
+                }
+
+                Warehouse warehouse = new Warehouse();
+                warehouse.No = i;
+                warehouse.Count = sumImport - sumExport;
+                warehouse.Supply = Supply;
+
+                WarehouseList.Add(warehouse);
+
+                i++;
+            }
+            SumCardStore = SumCardImport - SumCardExport;
+        }
+
+        void RefreshWHData()
+        {
+            WarehouseList = new ObservableCollection<Warehouse>();
+
+            var SupplyList = DataProvider.Ins.DB.Supplies;
+
+            int i = 1;
+            SumCardImport = 0;
+            SumCardExport = 0;
+            SumCardStore = 0;
+
+            foreach (var Supply in SupplyList)
+            {
+                var importList = DataProvider.Ins.DB.ImportInfoes.Where(p => p.IdSupply == Supply.Id);
+                var exportList = DataProvider.Ins.DB.ExportInfoes.Where(p => p.IdSupply == Supply.Id);
+
+                int sumImport = 0;
+                int sumExport = 0;
+
+                if (importList != null && importList.Count() > 0)
+                {
+                    sumImport = (int)importList.Sum(p => p.Quantity);
+                    SumCardImport += sumImport;
+                }
+
+                if (exportList != null && exportList.Count() > 0)
+                {
+                    sumExport = (int)exportList.Sum(p => p.Quantity);
                     SumCardExport += sumExport;
                 }
 

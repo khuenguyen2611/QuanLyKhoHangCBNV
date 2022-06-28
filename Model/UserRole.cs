@@ -9,10 +9,11 @@
 
 namespace QuanLyKhoHangCBNV.Model
 {
+    using QuanLyKhoHangCBNV.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class UserRole
+    public partial class UserRole : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserRole()
@@ -21,7 +22,8 @@ namespace QuanLyKhoHangCBNV.Model
         }
     
         public int Id { get; set; }
-        public string DisplayName { get; set; }
+        private string displayName;
+        public string DisplayName { get => displayName; set { displayName = value; OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }

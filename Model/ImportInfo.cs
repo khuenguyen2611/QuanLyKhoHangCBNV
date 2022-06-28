@@ -9,19 +9,32 @@
 
 namespace QuanLyKhoHangCBNV.Model
 {
+    using QuanLyKhoHangCBNV.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class ImportInfo
+    public partial class ImportInfo : BaseViewModel
     {
         public string Id { get; set; }
-        public string IdSupply { get; set; }
-        public string IdImport { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<double> ImportPrice { get; set; }
-        public string Status { get; set; }
-    
-        public virtual Import Import { get; set; }
-        public virtual Supply Supply { get; set; }
+        //IdSupply
+        private string idSupply;
+        public string IdSupply { get => idSupply; set { idSupply = value; OnPropertyChanged(); } }
+        //IdImport
+        private string idImport;
+        public string IdImport { get => idImport; set { idImport = value; OnPropertyChanged(); } }
+        //Quantity
+        private Nullable<int> quantity;
+        public Nullable<int> Quantity { get => quantity; set { quantity = value; OnPropertyChanged(); } }
+        //ImportPrice
+        private Nullable<double> importPrice;
+        public Nullable<double> ImportPrice { get => importPrice; set { importPrice = value; OnPropertyChanged(); } }
+        //Status
+        private string status;
+        public string Status { get => status; set { status = value; OnPropertyChanged(); } }
+
+        private Import import;
+        public virtual Import Import { get => import; set { import = value; OnPropertyChanged(); } }
+        private Supply supply;
+        public virtual Supply Supply { get => supply; set { supply = value; OnPropertyChanged(); } }
     }
 }

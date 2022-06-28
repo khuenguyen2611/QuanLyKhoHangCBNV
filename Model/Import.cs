@@ -9,10 +9,11 @@
 
 namespace QuanLyKhoHangCBNV.Model
 {
+    using QuanLyKhoHangCBNV.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class Import
+    public partial class Import : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Import()
@@ -21,7 +22,8 @@ namespace QuanLyKhoHangCBNV.Model
         }
     
         public string Id { get; set; }
-        public Nullable<System.DateTime> DateImport { get; set; }
+        private Nullable<System.DateTime> dateImport;
+        public Nullable<System.DateTime> DateImport { get => dateImport; set { dateImport = value; OnPropertyChanged();} }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ImportInfo> ImportInfoes { get; set; }

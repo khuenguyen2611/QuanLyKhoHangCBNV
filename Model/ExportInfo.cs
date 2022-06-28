@@ -9,21 +9,40 @@
 
 namespace QuanLyKhoHangCBNV.Model
 {
+    using QuanLyKhoHangCBNV.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class ExportInfo
+    public partial class ExportInfo : BaseViewModel
     {
         public string Id { get; set; }
-        public string IdSupply { get; set; }
-        public string IdExport { get; set; }
-        public int IdCustomer { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public string Status { get; set; }
-        public Nullable<double> ExportPrice { get; set; }
+        //IdSupply
+        private string idSupply;
+        public string IdSupply { get => idSupply; set { idSupply = value; OnPropertyChanged(); } }
+        //IdExport
+        private string idExport;
+        public string IdExport { get => idExport; set { idExport = value; OnPropertyChanged(); } }
+        //IdCustomer
+        private int idCustomer;
+        public int IdCustomer { get => idCustomer; set { idCustomer = value; OnPropertyChanged(); } }
+        //Quantity
+        private Nullable<int> quantity;
+        public Nullable<int> Quantity { get => quantity; set { quantity = value; OnPropertyChanged(); } }
+        //Status
+        private string status;
+        public string Status { get => status; set { status = value; OnPropertyChanged(); } }
+        //ExportPrice
+        private Nullable<double> exportPrice;
+        public Nullable<double> ExportPrice { get => exportPrice; set { exportPrice = value; OnPropertyChanged(); } }
     
-        public virtual Customer Customer { get; set; }
-        public virtual Export Export { get; set; }
-        public virtual Supply Supply { get; set; }
+        //Customer
+        private Customer customer;
+        public virtual Customer Customer { get => customer; set { customer = value; OnPropertyChanged(); } }
+        //Export
+        private Export export;
+        public virtual Export Export { get => export; set { export = value; OnPropertyChanged(); } }
+        //Supply
+        private Supply supply;
+        public virtual Supply Supply { get => supply; set { supply = value; OnPropertyChanged(); } }
     }
 }

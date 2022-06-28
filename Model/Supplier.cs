@@ -9,10 +9,11 @@
 
 namespace QuanLyKhoHangCBNV.Model
 {
+    using QuanLyKhoHangCBNV.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class Supplier
+    public partial class Supplier : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supplier()
@@ -21,12 +22,24 @@ namespace QuanLyKhoHangCBNV.Model
         }
     
         public int Id { get; set; }
-        public string DisplayName { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string MoreInfo { get; set; }
-        public Nullable<System.DateTime> ContractDate { get; set; }
+        //DisplayName
+        private string displayName;
+        public string DisplayName { get => displayName; set { displayName = value; OnPropertyChanged(); } }
+        //Address
+        private string address;
+        public string Address { get => address; set { address = value; OnPropertyChanged(); } }
+        //Phone
+        private string phone;
+        public string Phone { get => phone; set { phone = value; OnPropertyChanged(); } }
+        //Email
+        private string email;
+        public string Email { get => email; set { email = value; OnPropertyChanged(); } }
+        //MoreInfo
+        private string moreInfo;
+        public string MoreInfo { get => moreInfo; set { moreInfo = value; OnPropertyChanged(); } }
+        //ContractDate
+        private Nullable<System.DateTime> contractDate;
+        public Nullable<System.DateTime> ContractDate { get => contractDate; set { contractDate = value; OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supply> Supplies { get; set; }

@@ -34,7 +34,6 @@ namespace QuanLyKhoHangCBNV.ViewModel
 
         public ChangePasswordViewModel()
         {
-            //IsLoggedIn = false;
             Username = "";
             Password = "";
             NewPassword = "";
@@ -84,13 +83,12 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 }
                 else
                 {
-                    MessageBox.Show("New Password and Confirm Password is not match");
+                    MessageBox.Show("New Password and Confirm Password is not match", "Password Conflict", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
-                //IsLoggedIn = false;
-                MessageBox.Show("Username or old password are wrong !!!");
+                MessageBox.Show("Username or old password are wrong !!!", "Password Conflict", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
