@@ -37,6 +37,8 @@ namespace QuanLyKhoHangCBNV.ViewModel
 
         public MainViewModel()
         {
+            int idRole = 0;
+
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
                 isLoaded = true;
                 if (p == null) return;
@@ -49,9 +51,13 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 
                 var loginVM = loginWindow.DataContext as LoginViewModel;
 
+                string usernameLogged = loginVM.Username;
+                var userLogged = DataProvider.Ins.DB.Users.Where(x => x.UserName == usernameLogged).SingleOrDefault();
+
                 if (loginVM.IsLoggedIn)
                 {
                     p.Show();
+                    idRole = userLogged.IdRole;
                     LoadWareHouseData();
                 }
                 else
@@ -66,31 +72,46 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 RefreshWHData();
             });
 
-            MeasureCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            MeasureCommand = new RelayCommand<object>((p) => {
+                if (idRole == 1) return true;
+                return false;
+            }, (p) =>
             {
                 MeasureWindow measureWindow = new MeasureWindow();
                 measureWindow.ShowDialog();
             });
 
-            SupplierCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+            SupplierCommand = new RelayCommand<object>((p) => {
+                if (idRole == 1) return true;
+                return false;
+            }, (p) => {
                 SupplierWindow supplierWindow = new SupplierWindow();
                 supplierWindow.ShowDialog();
             }
             );
 
-            CustomerCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+            CustomerCommand = new RelayCommand<object>((p) => {
+                if (idRole == 1) return true;
+                return false;
+            }, (p) => {
                 CustomerWindow customerWindow = new CustomerWindow();
                 customerWindow.ShowDialog();
             }
             );
 
-            SupplyCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+            SupplyCommand = new RelayCommand<object>((p) => {
+                if (idRole == 1) return true;
+                return false;
+            }, (p) => {
                 SupplyWindow supplyWindow = new SupplyWindow();
                 supplyWindow.ShowDialog();
             }
             );
 
-            UserCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+            UserCommand = new RelayCommand<object>((p) => {
+                if(idRole == 1) return true;
+                return false;
+            }, (p) => {
                 UserWindow userWindow = new UserWindow();
                 userWindow.ShowDialog();
             }
