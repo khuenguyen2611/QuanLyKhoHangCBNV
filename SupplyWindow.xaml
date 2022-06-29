@@ -25,13 +25,13 @@
         
         Title="SupplyWindow" Height="500" Width="600">
     <Window.Resources>
-        <CollectionViewSource x:Key="MeasureAlphabet" Source="{Binding Measures}">
+        <CollectionViewSource x:Key="MeasureAlphabet" Source="{Binding Measures, UpdateSourceTrigger=PropertyChanged}">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="DisplayName"/>
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
 
-        <CollectionViewSource x:Key="SupplierAlphabet" Source="{Binding Suppliers}">
+        <CollectionViewSource x:Key="SupplierAlphabet" Source="{Binding Suppliers, UpdateSourceTrigger=PropertyChanged}">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="DisplayName"/>
             </CollectionViewSource.SortDescriptions>

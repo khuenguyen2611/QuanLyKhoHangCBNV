@@ -12,6 +12,9 @@ namespace QuanLyKhoHangCBNV.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        private int idRole = 0;
+        public int IdRole { get { return idRole; } set { idRole = value; } }
+
         private ObservableCollection<Warehouse> _WarehouseList;
         public ObservableCollection<Warehouse> WarehouseList { get { return _WarehouseList; } set { _WarehouseList = value; OnPropertyChanged(); } }
         public bool isLoaded = false;
@@ -23,6 +26,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
         public int SumCardExport { get { return sumCardExport; } set { sumCardExport = value; OnPropertyChanged(); } }
 
         int sumCardStore = 0;
+
         public int SumCardStore { get => sumCardStore; set { sumCardStore = value; OnPropertyChanged(); } }
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand LoadedWareHouseCommand { get; set; }
@@ -37,8 +41,6 @@ namespace QuanLyKhoHangCBNV.ViewModel
 
         public MainViewModel()
         {
-            int idRole = 0;
-
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
                 isLoaded = true;
                 if (p == null) return;
@@ -57,7 +59,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 if (loginVM.IsLoggedIn)
                 {
                     p.Show();
-                    idRole = userLogged.IdRole;
+                    IdRole = userLogged.IdRole;
                     LoadWareHouseData();
                 }
                 else
@@ -82,7 +84,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
             });
 
             SupplierCommand = new RelayCommand<object>((p) => {
-                if (idRole == 1) return true;
+                if (IdRole == 1) return true;
                 return false;
             }, (p) => {
                 SupplierWindow supplierWindow = new SupplierWindow();
@@ -91,7 +93,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
             );
 
             CustomerCommand = new RelayCommand<object>((p) => {
-                if (idRole == 1) return true;
+                if (IdRole == 1) return true;
                 return false;
             }, (p) => {
                 CustomerWindow customerWindow = new CustomerWindow();
@@ -100,7 +102,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
             );
 
             SupplyCommand = new RelayCommand<object>((p) => {
-                if (idRole == 1) return true;
+                if (IdRole == 1) return true;
                 return false;
             }, (p) => {
                 SupplyWindow supplyWindow = new SupplyWindow();
@@ -109,7 +111,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
             );
 
             UserCommand = new RelayCommand<object>((p) => {
-                if(idRole == 1) return true;
+                if(IdRole == 1) return true;
                 return false;
             }, (p) => {
                 UserWindow userWindow = new UserWindow();

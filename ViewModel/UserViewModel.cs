@@ -80,8 +80,6 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 User.UserName = UserName;
                 User.IdRole = SelectedRole.Id;
                 DataProvider.Ins.DB.SaveChanges();
-
-                //SelectedItem.DisplayName = DisplayName;
             });
 
             DeleteCommand = new RelayCommand<object>((p) =>

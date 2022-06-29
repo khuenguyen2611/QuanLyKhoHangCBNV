@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuanLyKhoHangCBNV.ViewModel
@@ -91,15 +92,44 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 return false;
             }, (p) =>
             {
+                //Validate
+                var SupplyCheck = SelectedSupply.Id;
+                ObservableCollection<ImportInfo> LsImports = new ObservableCollection<ImportInfo>(DataProvider.Ins.DB.ImportInfoes.Where(x => x.IdSupply == SupplyCheck));
+                ObservableCollection<ExportInfo> LsExports = new ObservableCollection<ExportInfo>(DataProvider.Ins.DB.ExportInfoes.Where(x => x.IdSupply == SupplyCheck));
+                int sumImport = 0;
+                int sumExport = 0;
                 var EditImport = DataProvider.Ins.DB.Imports.Where(x => x.Id == SelectedItem.Import.Id).SingleOrDefault();
                 var EditImportInfo = DataProvider.Ins.DB.ImportInfoes.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                EditImport.DateImport = DateImport;
-                EditImportInfo.IdSupply = SelectedSupply.Id;
+
+                int oldQuantity = (int) EditImportInfo.Quantity;
+
                 EditImportInfo.Quantity = Quantity;
-                EditImportInfo.ImportPrice = ImportPrice;
-                EditImportInfo.Status = Status;
-                
-                DataProvider.Ins.DB.SaveChanges();
+
+
+                foreach (ImportInfo import in LsImports)
+                {
+                    sumImport += (int)import.Quantity;
+                }
+                foreach(ExportInfo export in LsExports)
+                {
+                    sumExport += (int)export.Quantity;
+                }
+
+                if(sumImport < sumExport)
+                {
+                    MessageBox.Show("Import quantities can not lower than Export quantities", "Wrong Quantity", MessageBoxButton.OK, MessageBoxImage.Error);
+                    EditImportInfo.Quantity = oldQuantity;
+                }
+                else
+                {
+                    EditImport.DateImport = DateImport;
+                    EditImportInfo.IdSupply = SelectedSupply.Id;
+                    EditImportInfo.Quantity = Quantity;
+                    EditImportInfo.ImportPrice = ImportPrice;
+                    EditImportInfo.Status = Status;
+
+                    DataProvider.Ins.DB.SaveChanges();
+                } 
             });
 
             DeleteCommand = new RelayCommand<object>((p) =>
@@ -112,9 +142,6 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 return false;
             }, (p) =>
             {
-                //var Import = DataProvider.Ins.DB.Imports.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                //DataProvider.Ins.DB.Imports.Remove(Import);
-                //DataProvider.Ins.DB.SaveChanges();
                 var DeleteImportInfoes = DataProvider.Ins.DB.ImportInfoes.Where(x => x.IdImport == SelectedItem.IdImport).SingleOrDefault();
                 var DeleteImport = DataProvider.Ins.DB.Imports.Where(x => x.Id == SelectedItem.Import.Id).SingleOrDefault();
                 DataProvider.Ins.DB.Imports.Remove(DeleteImport);

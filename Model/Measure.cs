@@ -20,8 +20,9 @@ namespace QuanLyKhoHangCBNV.Model
         {
             this.Supplies = new HashSet<Supply>();
         }
-    
-        public int Id { get; set; }
+
+        private int id;
+        public int Id { get => id; set { id = value; OnPropertyChanged(); } }
         private string displayName;
         public string DisplayName { get => displayName; set { displayName = value; OnPropertyChanged(); } }
     
