@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuanLyKhoHangCBNV.ViewModel
@@ -66,12 +67,12 @@ namespace QuanLyKhoHangCBNV.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
 
         public SupplyViewModel()
         {
             List = new ObservableCollection<Supply>(DataProvider.Ins.DB.Supplies);
-            Measures = new ObservableCollection<Measure>(DataProvider.Ins.DB.Measures);
-            Suppliers = new ObservableCollection<Supplier>(DataProvider.Ins.DB.Suppliers);
+            
 
             AddCommand = new RelayCommand<object>((p) =>
             {
@@ -122,6 +123,11 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 List.Remove(Supply);
             });
 
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+                Measures = new ObservableCollection<Measure>(DataProvider.Ins.DB.Measures);
+                Suppliers = new ObservableCollection<Supplier>(DataProvider.Ins.DB.Suppliers);
+            }
+            );
         }
     }
 }

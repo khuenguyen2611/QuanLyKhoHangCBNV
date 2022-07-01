@@ -68,12 +68,16 @@ namespace QuanLyKhoHangCBNV.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
 
         public ExportInfoViewModel()
         {
             List = new ObservableCollection<ExportInfo>(DataProvider.Ins.DB.ExportInfoes);
-            Supplies = new ObservableCollection<Supply>(DataProvider.Ins.DB.Supplies);
-            Customers = new ObservableCollection<Customer>(DataProvider.Ins.DB.Customers);
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+                Supplies = new ObservableCollection<Supply>(DataProvider.Ins.DB.Supplies);
+                Customers = new ObservableCollection<Customer>(DataProvider.Ins.DB.Customers);
+            }
+            );
 
             AddCommand = new RelayCommand<object>((p) =>
             {
