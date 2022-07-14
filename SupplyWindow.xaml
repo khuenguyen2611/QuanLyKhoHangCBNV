@@ -20,10 +20,18 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        x:Name="window"
         DataContext="{StaticResource SupplyVM}"
         
+        Name="supplyWindow"
         Title="SupplyWindow" Height="500" Width="600">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
+                                   CommandParameter="{Binding ElementName=supplyWindow}"
+                                   />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Window.Resources>
         <CollectionViewSource x:Key="MeasureAlphabet" Source="{Binding Measures, UpdateSourceTrigger=PropertyChanged}">
             <CollectionViewSource.SortDescriptions>
@@ -46,7 +54,7 @@
 
         <!--Control Bar-->
         <Grid Grid.Row="0">
-            <uc:ControlBarUC Tag="{Binding Title, ElementName=window}"></uc:ControlBarUC>
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=supplyWindow}"></uc:ControlBarUC>
         </Grid>
 
         <!--Main Supply-->

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyKhoHangCBNV", "QuanLyKhoHangCBNV.csproj", "{2DD33DDE-1E88-4389-BB19-695917C2225C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreatePassword", "..\CreatePassword\CreatePassword.csproj", "{888DBF3E-49E5-4E93-BED9-B00400987B99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2DD33DDE-1E88-4389-BB19-695917C2225C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DD33DDE-1E88-4389-BB19-695917C2225C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DD33DDE-1E88-4389-BB19-695917C2225C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{888DBF3E-49E5-4E93-BED9-B00400987B99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{888DBF3E-49E5-4E93-BED9-B00400987B99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{888DBF3E-49E5-4E93-BED9-B00400987B99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{888DBF3E-49E5-4E93-BED9-B00400987B99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

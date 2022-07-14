@@ -60,11 +60,15 @@ namespace QuanLyKhoHangCBNV.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
 
         public ImportInfoViewModel()
         {
             List = new ObservableCollection<ImportInfo>(DataProvider.Ins.DB.ImportInfoes);
-            Supplies = new ObservableCollection<Supply>(DataProvider.Ins.DB.Supplies);
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+                Supplies = new ObservableCollection<Supply>(DataProvider.Ins.DB.Supplies);
+            }
+           );
 
             AddCommand = new RelayCommand<object>((p) =>
             { 
@@ -142,7 +146,6 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 return false;
             }, (p) =>
             {
-                //Validate
                 var SupplyCheck = SelectedSupply.Id;
                 ObservableCollection<ImportInfo> LsImports = new ObservableCollection<ImportInfo>(DataProvider.Ins.DB.ImportInfoes.Where(x => x.IdSupply == SupplyCheck));
                 ObservableCollection<ExportInfo> LsExports = new ObservableCollection<ExportInfo>(DataProvider.Ins.DB.ExportInfoes.Where(x => x.IdSupply == SupplyCheck));
@@ -178,7 +181,7 @@ namespace QuanLyKhoHangCBNV.ViewModel
                     DataProvider.Ins.DB.SaveChanges();
 
                     List.Remove(DeleteImportInfoes);
-                }    
+                }
             });
 
         }

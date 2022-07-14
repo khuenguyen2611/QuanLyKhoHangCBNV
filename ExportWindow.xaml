@@ -20,10 +20,18 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        x:Name="window"
+        x:Name="windowExport"
         DataContext="{StaticResource ExportInfoVM}"
         
         Title="Export Window" Height="500" Width="600">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
+                                   CommandParameter="{Binding ElementName=mainWindow}"
+                                   />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Window.Resources>
         <CollectionViewSource x:Key="SupplyAlphabet" Source="{Binding Supplies}">
             <CollectionViewSource.SortDescriptions>
@@ -45,7 +53,7 @@
 
         <!--Control Bar-->
         <Grid Grid.Row="0">
-            <uc:ControlBarUC Tag="{Binding Title, ElementName=window}"></uc:ControlBarUC>
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=windowExport}"></uc:ControlBarUC>
         </Grid>
 
         <!--Main Export-->
