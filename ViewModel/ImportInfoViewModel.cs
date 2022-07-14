@@ -142,14 +142,43 @@ namespace QuanLyKhoHangCBNV.ViewModel
                 return false;
             }, (p) =>
             {
-                var DeleteImportInfoes = DataProvider.Ins.DB.ImportInfoes.Where(x => x.IdImport == SelectedItem.IdImport).SingleOrDefault();
-                var DeleteImport = DataProvider.Ins.DB.Imports.Where(x => x.Id == SelectedItem.Import.Id).SingleOrDefault();
-                DataProvider.Ins.DB.Imports.Remove(DeleteImport);
-                DataProvider.Ins.DB.SaveChanges();
+                //Validate
+                var SupplyCheck = SelectedSupply.Id;
+                ObservableCollection<ImportInfo> LsImports = new ObservableCollection<ImportInfo>(DataProvider.Ins.DB.ImportInfoes.Where(x => x.IdSupply == SupplyCheck));
+                ObservableCollection<ExportInfo> LsExports = new ObservableCollection<ExportInfo>(DataProvider.Ins.DB.ExportInfoes.Where(x => x.IdSupply == SupplyCheck));
+                int sumImport = 0;
+                int sumExport = 0;
+                var EditImport = DataProvider.Ins.DB.Imports.Where(x => x.Id == SelectedItem.Import.Id).SingleOrDefault();
+                var EditImportInfo = DataProvider.Ins.DB.ImportInfoes.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
 
-                List.Remove(DeleteImportInfoes);
+                int oldQuantity = (int)EditImportInfo.Quantity;
 
-                //List.Remove(Import);
+                EditImportInfo.Quantity = 0;
+
+
+                foreach (ImportInfo import in LsImports)
+                {
+                    sumImport += (int)import.Quantity;
+                }
+                foreach (ExportInfo export in LsExports)
+                {
+                    sumExport += (int)export.Quantity;
+                }
+
+                if (sumImport < sumExport)
+                {
+                    MessageBox.Show("Import quantities can not lower than Export quantities", "Wrong Quantity", MessageBoxButton.OK, MessageBoxImage.Error);
+                    EditImportInfo.Quantity = oldQuantity;
+                }
+                else
+                {
+                    var DeleteImportInfoes = DataProvider.Ins.DB.ImportInfoes.Where(x => x.IdImport == SelectedItem.IdImport).SingleOrDefault();
+                    var DeleteImport = DataProvider.Ins.DB.Imports.Where(x => x.Id == SelectedItem.Import.Id).SingleOrDefault();
+                    DataProvider.Ins.DB.Imports.Remove(DeleteImport);
+                    DataProvider.Ins.DB.SaveChanges();
+
+                    List.Remove(DeleteImportInfoes);
+                }    
             });
 
         }
