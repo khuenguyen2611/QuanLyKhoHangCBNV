@@ -71,7 +71,7 @@
                       VerticalAlignment="Center"/>
 
                     <DatePicker Margin="5 5 15 5" SelectedDate="{Binding ContractDate, UpdateSourceTrigger=PropertyChanged}"
-                                VerticalAlignment="Center" Width="100" materialDesign:HintAssist.Hint="Pick Date"
+                                VerticalAlignment="Center" Width="100" materialDesign:HintAssist.Hint="Contract Date"
                       Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                 </WrapPanel>
             </materialDesign:Card>

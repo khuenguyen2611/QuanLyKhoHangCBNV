@@ -23,7 +23,7 @@
         x:Name="windowExport"
         DataContext="{StaticResource ExportInfoVM}"
         
-        Title="Export Window" Height="500" Width="600">
+        Title="Export Window" Height="500" Width="700">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
